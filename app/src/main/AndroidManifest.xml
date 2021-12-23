@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Alpha">
         <activity
+            android:name=".map"
+            android:exported="false" />
+        <activity
+            android:name=".notification"
+            android:exported="false" />
+        <activity
             android:name=".camera"
             android:exported="false" />
         <activity

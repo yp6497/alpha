@@ -60,7 +60,7 @@ public class camera extends AppCompatActivity {
         // initialise views
         btnSelect = findViewById(R.id.btnChoose);
         btnUpload = findViewById(R.id.btnUpload);
-        imageView = findViewById(R.id.imgView);
+        imageView = findViewById(R.id.imageview);
 
         // get the Firebase  storage reference
         storage = FirebaseStorage.getInstance();

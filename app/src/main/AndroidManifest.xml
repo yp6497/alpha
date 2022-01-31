@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Alpha">
         <activity
+            android:name=".gallery"
+            android:exported="false" />
+        <activity
             android:name=".map"
             android:exported="false" />
         <activity

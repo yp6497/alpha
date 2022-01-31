@@ -26,7 +26,7 @@ import android.os.Build;
                     NotificationManager.IMPORTANCE_LOW
             );
 
-            channel.setDescription("This is notificashion ");
+            channel.setDescription("This is a notification");
             NotificationManager m = getSystemService(NotificationManager.class);
             m.createNotificationChannel(channel);
         }

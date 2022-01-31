@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void go(View view) {
-        Intent si = new Intent(this, notification.class);
+        Intent si = new Intent(this, gallery.class);
         startActivity(si);
     }
 

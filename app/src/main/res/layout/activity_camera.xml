@@ -19,6 +19,7 @@
         <Button
             android:id="@+id/btnChoose"
             android:text="Choose"
+            android:onClick="openCam"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
@@ -27,6 +28,7 @@
         <Button
             android:id="@+id/btnUpload"
             android:text="Upload"
+            android:onClick="uploadImage"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />

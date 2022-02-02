@@ -21,6 +21,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Gallery;
@@ -47,6 +49,7 @@ public class notification extends AppCompatActivity {
 
     public EditText notiText;
     public NotificationManagerCompat nManager;
+    public static final String CHANNEL_ID = "channel";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,22 @@ public class notification extends AppCompatActivity {
         nManager = NotificationManagerCompat.from(this);
         //createNotificationChannels();
 
+        createNotificationChannels();
+
+    }
+
+    private void createNotificationChannels() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    CHANNEL_ID,
+                    "Channel",
+                    NotificationManager.IMPORTANCE_LOW
+            );
+
+            channel.setDescription("This is a notification");
+            NotificationManager m = getSystemService(NotificationManager.class);
+            m.createNotificationChannel(channel);
+        }
     }
 
     public void uploadnot(View view) {
@@ -76,5 +95,39 @@ public class notification extends AppCompatActivity {
 
         nManager.notify(1, n);
 
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.Gallery) {
+            Intent si = new Intent(this, gallery.class);
+            startActivity(si);
+        }
+        else if (id == R.id.Auth)
+        {
+            Intent si = new Intent(this, MainActivity.class);
+            startActivity(si);
+        }
+        else if (id == R.id.Camera)
+        {
+            Intent si = new Intent(this, camera.class);
+            startActivity(si);
+        }
+        else if (id == R.id.Map)
+        {
+            Intent si = new Intent(this, map.class);
+            startActivity(si);
+        }
+
+        return true;
     }
 }

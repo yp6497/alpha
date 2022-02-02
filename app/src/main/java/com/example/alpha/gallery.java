@@ -12,6 +12,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -198,6 +200,40 @@ public class gallery extends AppCompatActivity {
                                 }
                             });
         }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.Camera) {
+            Intent si = new Intent(this, camera.class);
+            startActivity(si);
+        }
+        else if (id == R.id.Auth)
+        {
+            Intent si = new Intent(this, MainActivity.class);
+            startActivity(si);
+        }
+        else if (id == R.id.Notification)
+        {
+            Intent si = new Intent(this, notification.class);
+            startActivity(si);
+        }
+        else if (id == R.id.Map)
+        {
+            Intent si = new Intent(this, map.class);
+            startActivity(si);
+        }
+
+        return true;
     }
 }
 

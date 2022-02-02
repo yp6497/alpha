@@ -17,6 +17,7 @@
         android:layout_height="wrap_content">
 
         <!--Button for choosing image from gallery-->
+
         <Button
             android:id="@+id/btnSelectG"
             android:layout_width="0dp"
@@ -31,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Upload" />
+
     </LinearLayout>
 
     <!--Image View for showing image chosen from gallery-->

@@ -44,7 +44,7 @@
         <View
             android:id="@+id/view8"
             android:layout_width="match_parent"
-            android:layout_height="64dp" />
+            android:layout_height="32dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,11 +60,10 @@
             <EditText
                 android:id="@+id/et"
                 android:layout_width="747dp"
-                android:layout_height="match_parent"
+                android:layout_height="468dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:inputType="textPersonName" />
 
             <View
                 android:id="@+id/view9"

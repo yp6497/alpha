@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -88,16 +90,40 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }
-
          */
-
-
     }
 
-    public void go(View view) {
-        Intent si = new Intent(this, camera.class);
-        startActivity(si);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.Gallery) {
+            Intent si = new Intent(this, gallery.class);
+            startActivity(si);
+        }
+        else if (id == R.id.Camera)
+        {
+            Intent si = new Intent(this, camera.class);
+            startActivity(si);
+        }
+        else if (id == R.id.Notification)
+        {
+            Intent si = new Intent(this, notification.class);
+            startActivity(si);
+        }
+        else if (id == R.id.Map)
+        {
+            Intent si = new Intent(this, map.class);
+            startActivity(si);
+        }
+
+        return true;
+    }
 }
 

@@ -100,6 +100,7 @@ public class map extends AppCompatActivity implements OnMapReadyCallback{
         mapView.getMapAsync(this);
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
     }
 
     @Override

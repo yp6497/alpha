@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
-        //email = findViewById(R.id.email);
-        //password = findViewById(R.id.password);
         et_mail=(EditText) findViewById(R.id.et_email);
         et_password=(EditText) findViewById(R.id.et_password);
         progressBar_ma=(ProgressBar) findViewById(R.id.progressBar_ma);
@@ -55,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         progressBar_ma.setVisibility(View.INVISIBLE);
                         // Sign in success, update UI with the signed-in user's information
-                        Toast.makeText(MainActivity.this, "User Registered Successfully!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
                     }
                     else
                     {
@@ -70,69 +68,10 @@ public class MainActivity extends AppCompatActivity {
         else
         {
             progressBar_ma.setVisibility(View.INVISIBLE);
-            Toast.makeText(this, "Enter all the required information!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Enter all the required information", Toast.LENGTH_SHORT).show();
         }
     }
 
-    /*
-    public void SignIn(View view) {
-
-        emailS = email.getText().toString();
-        passwordS = password.getText().toString();
-
-        if (TextUtils.isEmpty(emailS))
-            email.setError("Email is required");
-        if (TextUtils.isEmpty(passwordS))
-            password.setError("Password is required");
-        else {
-            if (password.length() < 6)
-                password.setError("password must be longer than 6 digits");
-            else {
-                fAuth.createUserWithEmailAndPassword
-                        (emailS, passwordS).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() { //this
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-
-                            Toast.makeText(MainActivity.this, "User Created", Toast.LENGTH_SHORT).show();
-                        } else {
-
-                            Toast.makeText(MainActivity.this, "Error" + task.getException().getMessage(),
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
-        }
-
-
-        if (TextUtils.isEmpty(emailS))
-            email.setError("Email is required");
-        if (TextUtils.isEmpty(passwordS))
-            password.setError("Password is required");
-        else {
-            if (password.length() < 6)
-                password.setError("password must be longer than 6 digits");
-            else {
-                fAuth.signInWithEmailAndPassword
-                        (emailS, passwordS).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-
-                            Toast.makeText(MainActivity.this, "User Signed", Toast.LENGTH_SHORT).show();
-                        } else {
-
-                            Toast.makeText(MainActivity.this, "Error" + task.getException().getMessage(),
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
-        }
-    }
-
-     */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -38,7 +38,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -235,7 +236,7 @@ public class map extends AppCompatActivity implements OnMapReadyCallback{
         adb.setCancelable(false);
         adb.setTitle("Insert Address");
         et_GetAddress=new EditText(this);
-        et_GetAddress.setHint("Type Text Here: Street, City, Country");
+        et_GetAddress.setHint("Please insert: Street, City, Country");
         et_GetAddress.setGravity(Gravity.CENTER);
         adb.setView(et_GetAddress);
         adb.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
@@ -271,8 +272,8 @@ public class map extends AppCompatActivity implements OnMapReadyCallback{
 
                                     tv_latitude.setText("Latitude: "+user_address.getLatitude());
                                     tv_longitude.setText("Longitude: "+user_address.getLongitude());
-                                    tv_country.setText("Country Name: "+user_address.getCountryName());
-                                    tv_city.setText("City Name: "+user_address.getLocality());
+                                    tv_country.setText("Country: "+user_address.getCountryName());
+                                    tv_city.setText("City: "+user_address.getLocality());
                                     tv_address.setText("Address: "+user_address.getAddressLine(0));
 
                                     progressBar.setVisibility(View.INVISIBLE);

@@ -31,26 +31,65 @@ import java.util.UUID;
 
 public class gallery extends AppCompatActivity {
 
-    private Button btnSelectG, btnUploadG;
+    //private Button btnSelectG, btnUploadG;
 
     // view for image view
-    private ImageView imageView;
+    //private ImageView imageView;
 
     // Uri indicates, where the image will be picked from
-    private Uri filePath;
+    //private Uri filePath;
 
     // request code
-    private final int PICK_IMAGE_REQUEST = 22;
+    //private final int PICK_IMAGE_REQUEST = 22;
+
+    ImageView iv;
 
     // instance for firebase storage and StorageReference
-    FirebaseStorage storage;
-    StorageReference storageReference;
+    //FirebaseStorage storage;
+    //StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
 
+        iv = (ImageView) findViewById(R.id.iv);
+
+
+    }
+
+        public void openGallery (View view){
+
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), 22);
+        }
+
+        @Override
+        protected void onActivityResult ( int requestCode, int resultCode, Intent data){
+            super.onActivityResult(requestCode, resultCode, data);
+            if (resultCode == RESULT_OK && requestCode == 22) {
+                iv.setImageURI(data.getData());
+
+                UploadTask uploadTask = FBref.storageRef.child("images/" + data.getData().getLastPathSegment()).putFile(data.getData());
+                uploadTask.addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Toast.makeText(gallery.this, "Failed to upload", Toast.LENGTH_SHORT).show();
+                        // Handle unsuccessful uploads
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                        // ...
+                        Toast.makeText(gallery.this, "Photo uploaded", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        }
+        /*
         ActionBar actionBar;
         actionBar = getSupportActionBar();
         ColorDrawable colorDrawable
@@ -203,6 +242,8 @@ public class gallery extends AppCompatActivity {
     }
 
 
+         */
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -236,6 +277,9 @@ public class gallery extends AppCompatActivity {
         return true;
     }
 }
+
+
+
 
 
 

@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -38,6 +39,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.google.android.gms.maps.UiSettings;
@@ -52,7 +54,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.io.IOException;
 import java.util.List;
 
-public class map extends AppCompatActivity implements OnMapReadyCallback{
+public class map extends FragmentActivity implements OnMapReadyCallback{
 
 
     MapView mapView;
@@ -60,7 +62,6 @@ public class map extends AppCompatActivity implements OnMapReadyCallback{
     Bundle mapViewBundle;
     TextView tv_latitude;
     TextView tv_longitude;
-    TextView tv_country;
     TextView tv_city;
     TextView tv_address;
     ProgressBar progressBar;
@@ -85,10 +86,12 @@ public class map extends AppCompatActivity implements OnMapReadyCallback{
         mapView = (MapView) findViewById(R.id.mapView);
         tv_latitude=(TextView) findViewById(R.id.tv_latitude);
         tv_longitude=(TextView) findViewById(R.id.tv_longitude);
-        tv_country=(TextView) findViewById(R.id.tv_country);
         tv_city=(TextView) findViewById(R.id.tv_city);
         tv_address=(TextView) findViewById(R.id.tv_address);
         progressBar=(ProgressBar) findViewById(R.id.progressBar);
+
+        //SupportMapFragment mapFragment= (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        //mapFragment.getMapAsync(this);
 
         progressBar.setVisibility(View.VISIBLE);
 
@@ -103,55 +106,9 @@ public class map extends AppCompatActivity implements OnMapReadyCallback{
 
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        Bundle mapViewBundle = outState.getBundle(MAP_VIEW_BUNDLE_KEY);
-        if (mapViewBundle == null) {
-            mapViewBundle = new Bundle();
-            outState.putBundle(MAP_VIEW_BUNDLE_KEY, mapViewBundle);
-        }
-
-        mapView.onSaveInstanceState(mapViewBundle);
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mapView.onStart();
-        turnGPSOn();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mapView.onStop();
-    }
-    @Override
-    protected void onPause() {
-        mapView.onPause();
-        super.onPause();
-    }
-    @Override
-    protected void onDestroy() {
-        mapView.onDestroy();
-        super.onDestroy();
-        turnGPSOff();
-    }
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
-
     @SuppressLint("MissingPermission")
     public void onMapReady(GoogleMap googleMap) {
+
         turnGPSOn();
 
         gmap = googleMap;
@@ -216,11 +173,10 @@ public class map extends AppCompatActivity implements OnMapReadyCallback{
                     float zoomLevel = 17.0f; //This goes up to 21
                     gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(cl, zoomLevel));
 
-                    tv_latitude.setText("Latitude: "+latitude);
-                    tv_longitude.setText("Longitude: "+longitude);
-                    tv_country.setText("Country Name: "+addresses.get(0).getCountryName());
                     tv_city.setText("City Name: "+addresses.get(0).getLocality());
                     tv_address.setText("Address: "+addresses.get(0).getAddressLine(0));
+                    tv_latitude.setText("Latitude: "+latitude);
+                    tv_longitude.setText("Longitude: "+longitude);
 
                     progressBar.setVisibility(View.INVISIBLE);
                 } catch (IOException e) {
@@ -273,7 +229,6 @@ public class map extends AppCompatActivity implements OnMapReadyCallback{
 
                                     tv_latitude.setText("Latitude: "+user_address.getLatitude());
                                     tv_longitude.setText("Longitude: "+user_address.getLongitude());
-                                    tv_country.setText("Country: "+user_address.getCountryName());
                                     tv_city.setText("City: "+user_address.getLocality());
                                     tv_address.setText("Address: "+user_address.getAddressLine(0));
 
@@ -290,7 +245,7 @@ public class map extends AppCompatActivity implements OnMapReadyCallback{
                 }
                 else
                 {
-                    Toast.makeText(map.this, "Insert Address!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(map.this, "Insert Address", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -369,4 +324,52 @@ public class map extends AppCompatActivity implements OnMapReadyCallback{
 
         return true;
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        Bundle mapViewBundle = outState.getBundle(MAP_VIEW_BUNDLE_KEY);
+        if (mapViewBundle == null) {
+            mapViewBundle = new Bundle();
+            outState.putBundle(MAP_VIEW_BUNDLE_KEY, mapViewBundle);
+        }
+
+        mapView.onSaveInstanceState(mapViewBundle);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mapView.onStart();
+        turnGPSOn();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+    @Override
+    protected void onPause() {
+        mapView.onPause();
+        super.onPause();
+    }
+    @Override
+    protected void onDestroy() {
+        mapView.onDestroy();
+        super.onDestroy();
+        turnGPSOff();
+    }
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
 }

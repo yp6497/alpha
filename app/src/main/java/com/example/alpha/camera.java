@@ -64,7 +64,6 @@ public class camera extends AppCompatActivity {
     public void openCamera(View view) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
-        //if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
         if (true) {
             // Create the File where the photo should go
             File photoFile = null;
@@ -151,33 +150,6 @@ public class camera extends AppCompatActivity {
         photoUri = Uri.fromFile(image);
         return image;
     }
-
-    // for tumbnail (small size)
-    private void uploadImg(Bitmap captureImg)
-    {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        captureImg.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] data = baos.toByteArray();
-
-        // -info-: UUID.randomUUID().toString().replaceAll("-", "") - makes hash string for now, it would changed later!
-        UploadTask uploadTask = FBref.storageRef.child("images/" + UUID.randomUUID().toString().replaceAll("-", "")).putBytes(data);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                Toast.makeText(camera.this, "Failed to upload", Toast.LENGTH_SHORT).show();
-                // Handle unsuccessful uploads
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(camera.this, "uploaded photo", Toast.LENGTH_SHORT).show();
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
-            }
-        });
-    }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

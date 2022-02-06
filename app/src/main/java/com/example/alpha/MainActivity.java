@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void insert(View view) {
+    public void insertInfo(View view) {
         progressBar_ma.setVisibility(View.VISIBLE);
         String email=et_mail.getText().toString();
         String password=et_password.getText().toString();

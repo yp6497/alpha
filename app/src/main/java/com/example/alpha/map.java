@@ -293,39 +293,6 @@ public class map extends FragmentActivity implements OnMapReadyCallback{
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.Gallery) {
-            Intent si = new Intent(this, gallery.class);
-            startActivity(si);
-        }
-        else if (id == R.id.Auth)
-        {
-            Intent si = new Intent(this, MainActivity.class);
-            startActivity(si);
-        }
-        else if (id == R.id.Notification)
-        {
-            Intent si = new Intent(this, notification.class);
-            startActivity(si);
-        }
-        else if (id == R.id.Camera)
-        {
-            Intent si = new Intent(this, camera.class);
-            startActivity(si);
-        }
-
-        return true;
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
@@ -372,4 +339,36 @@ public class map extends FragmentActivity implements OnMapReadyCallback{
         mapView.onLowMemory();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.Camera) {
+            Intent si = new Intent(this, camera.class);
+            startActivity(si);
+        }
+        else if (id == R.id.Auth)
+        {
+            Intent si = new Intent(this, MainActivity.class);
+            startActivity(si);
+        }
+        else if (id == R.id.Notification)
+        {
+            Intent si = new Intent(this, notification.class);
+            startActivity(si);
+        }
+        else if (id == R.id.Gallery)
+        {
+            Intent si = new Intent(this, gallery.class);
+            startActivity(si);
+        }
+
+        return true;
+    }
 }
